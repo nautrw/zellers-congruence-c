@@ -10,4 +10,4 @@ utils.o: utils.c utils.h
 	$(CC) -c utils.c
 
 clean:
-	rm -rf *.o zeller
+	rm -rf *.o zeller *.out

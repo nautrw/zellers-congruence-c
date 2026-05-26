@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+
 int main() {
   const char *week_days[7] = {"Saturday",  "Sunday",   "Monday", "Tuesday",
                               "Wednesday", "Thursday", "Friday"};
@@ -20,9 +21,8 @@ int main() {
   printf("Enter a month: ");
   fgets(month_input, sizeof(month_input), stdin);
   month_input[strcspn(month_input, "\n")] = '\0';
-  int month = get_index(months, sizeof(months) / sizeof(months[0]),
-                        strlower(month_input)) +
-              1;
+  int month = getindex(months, sizeof(months) / sizeof(months[0]),
+                        strlower(month_input));
 
   if (month == -1 || month > 11) {
     printf("You must enter a valid month.");
@@ -33,6 +33,26 @@ int main() {
   printf("Enter a day number: ");
   scanf("%d", &month_day);
 
+  int leap_year = isleap(year);
+
+  // When it is a leap year and the user entered February and over 29
+  // february still = 1 because it has not been changed
+  if (leap_year == 1 && month == 1 && month_day > 29) {
+    printf("%d is a leap year and February was selected, so you must enter a day that is less than or equal to 29.\n", year);
+    exit(EXIT_FAILURE);
+  } else if (leap_year != 1 && month == 1 && month_day > 28) {
+    printf("February only has 28 days.\n");
+    exit(EXIT_FAILURE);
+  }
+
+  // april, june, september, november all have 30 days
+  const int thirty_day_months[4] = {3, 5, 8, 10};
+  if (ismember(thirty_day_months, 4, month) == 1 && month_day > 30) {
+    printf("That month only has 30 days.\n");
+    exit(EXIT_FAILURE);
+  }
+ 
+  month++; // month is not supposed to be 0-based
   if (month < 3) {
     month += 12;
     year--;
@@ -41,11 +61,12 @@ int main() {
   int K = year % 100;
   int J = year / 100;
 
+  // `+ 7 % 7` normalizes the number so that it is always 0 > x > 6, fixes 1 mar 1900 segfaulting
   int week_day =
-      (month_day + (13 * (month + 1) / 5) + K + (K / 4) + (J / 4) - (2 * J)) %
-      7;
+      (((month_day + (13 * (month + 1) / 5) + K + (K / 4) + (J / 4) - (2 * J)) %
+      7) + 7) % 7;
 
   printf("That day will be a %s.\n", week_days[week_day]);
 
-  return 0;
+  return EXIT_SUCCESS;
 }
