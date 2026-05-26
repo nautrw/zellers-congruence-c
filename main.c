@@ -14,12 +14,12 @@ int main()
 		"july", "august", "september", "october", "november", "december"};
 
 	int year;
-	printf("What year were you born in? ");
+	printf("Enter a year: ");
 	scanf("%d", &year);
 
 	getchar();
 	char month_input[12];
-	printf("What month were you born in? ");
+	printf("Enter a month: ");
 	fgets(month_input, sizeof(month_input), stdin);
 	month_input[strcspn(month_input, "\n")] = '\0';
 	int month = get_index(months, sizeof(months) / sizeof(months[0]), strlower(month_input)) + 1;
@@ -30,7 +30,7 @@ int main()
 	}
 
 	int month_day;
-	printf("What day of the month were you born on? ");
+	printf("Enter a day number: ");
 	scanf("%d", &month_day);
 
 	if (month < 3)
@@ -44,7 +44,7 @@ int main()
 
 	int week_day = (month_day + (13 * (month + 1) / 5) + K + (K / 4) + (J / 4) - (2 * J)) % 7;
 	
-	printf("You were born on a %s.\n", week_days[week_day]); 
+	printf("That day will be a %s.\n", week_days[week_day]); 
 
 	return 0;
 }
