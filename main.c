@@ -12,7 +12,8 @@ int main() {
                             "september", "october",  "november", "december"};
 
   int year;
-  printf("Enter a year: "); scanf("%d", &year);
+  printf("Enter a year: ");
+  scanf("%d", &year);
 
   getchar();
   char month_input[12];
