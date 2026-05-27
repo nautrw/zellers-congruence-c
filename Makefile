@@ -1,13 +1,13 @@
 CC=gcc
+CFLAGS=-Wall -Wextra -Werror -std=c11 -O2
+TARGET=zeller
+OBJS=main.o utils.o
 
-zeller: main.o utils.o
-	$(CC) main.o utils.o -o zeller
+$(TARGET): $(OBJS)
+	$(CC) $(OBJS) -o $(TARGET)
 
-main.o: main.c utils.h
-	$(CC) -c main.c
-
-utils.o: utils.c utils.h
-	$(CC) -c utils.c
+%.o: %.c utils.h
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -rf *.o zeller *.out
+	rm -f *.o *.exe *.out zeller
