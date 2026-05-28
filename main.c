@@ -3,6 +3,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+int zeller_formula(int year, int month, int month_day);
 
 int main() {
   const char *week_days[7] = {"Saturday",  "Sunday",   "Monday", "Tuesday",
@@ -22,7 +23,7 @@ int main() {
   fgets(month_input, sizeof(month_input), stdin);
   month_input[strcspn(month_input, "\n")] = '\0';
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
-                        strlower(month_input));
+                       strlower(month_input));
 
   if (month == -1 || month > 11) {
     printf("You must enter a valid month.");
@@ -38,7 +39,9 @@ int main() {
   // When it is a leap year and the user entered February and over 29
   // february still = 1 because it has not been changed
   if (leap_year == 1 && month == 1 && month_day > 29) {
-    printf("%d is a leap year and February was selected, so you must enter a day that is less than or equal to 29.\n", year);
+    printf("%d is a leap year and February was selected, "
+           "so you must enter a day that is less than or equal to 29.\n",
+           year);
     exit(EXIT_FAILURE);
   } else if (leap_year != 1 && month == 1 && month_day > 28) {
     printf("February only has 28 days.\n");
@@ -51,8 +54,18 @@ int main() {
     printf("That month only has 30 days.\n");
     exit(EXIT_FAILURE);
   }
- 
-  month++; // month is not supposed to be 0-based
+
+  int week_day = zeller_formula(year, month, month_day);
+
+  printf("That day will be a %s.\n", week_days[week_day]);
+
+  return EXIT_SUCCESS;
+}
+
+int zeller_formula(int year, int month, int month_day) {
+  //month is not supposed to be 0-based
+  month++;
+
   if (month < 3) {
     month += 12;
     year--;
@@ -60,13 +73,14 @@ int main() {
 
   int K = year % 100;
   int J = year / 100;
-
-  // `+ 7 % 7` normalizes the number so that it is always 0 > x > 6, fixes 1 mar 1900 segfaulting
+  
+  // `+ 7 % 7` normalizes the number so that it is always 0 > x > 6
+  // fixes 1 mar 1900 segfaulting
   int week_day =
       (((month_day + (13 * (month + 1) / 5) + K + (K / 4) + (J / 4) - (2 * J)) %
-      7) + 7) % 7;
+        7) +
+       7) %
+      7;
 
-  printf("That day will be a %s.\n", week_days[week_day]);
-
-  return EXIT_SUCCESS;
+  return week_day;
 }
