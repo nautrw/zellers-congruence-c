@@ -23,9 +23,7 @@ int main()
 
   getchar();
   char month_input[12];
-  printf("Enter a month: ");
-  fgets(month_input, sizeof(month_input), stdin);
-  month_input[strcspn(month_input, "\n")] = '\0';
+  strcpy(month_input, getstr("Enter a month: ", 12));
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
                         strlower(month_input));
 

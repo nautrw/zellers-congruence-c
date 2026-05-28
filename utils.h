@@ -13,4 +13,6 @@ int ismember(const int *nums, size_t size, int target);
 
 int getint(char *prompt, size_t size);
 
+char *getstr(char *prompt, size_t size);
+
 #endif

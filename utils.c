@@ -49,3 +49,15 @@ int getint(char *prompt, size_t size) {
   fgets(input_str, size, stdin);
   return atoi(input_str);
 }
+
+char *getstr(char *prompt, size_t size) {
+  printf("%s", prompt);
+  char input_str[size];
+  fgets(input_str, size, stdin);
+  input_str[strcspn(input_str, "\n")] = '\0';
+
+  char *result = malloc(size);
+  if (result == NULL) return NULL;
+  strcpy(result, input_str);
+  return result;
+}
