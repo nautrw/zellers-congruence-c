@@ -22,7 +22,8 @@ int main() {
 
   getchar();
   char month_input[12];
-  strcpy(month_input, getstr("Enter a month: ", 12));
+  strcpy(month_input, getstr("Enter a month: ", sizeof(month_input)));
+
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
                        strlower(month_input));
 

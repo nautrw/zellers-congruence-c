@@ -56,6 +56,10 @@ char *getstr(char *prompt, size_t size) {
   fgets(input_str, size, stdin);
   input_str[strcspn(input_str, "\n")] = '\0';
 
+  // from my limited understanding, returning `input_str` would be wrong because
+  // that pointer is in the stack, so it only exists for the duration of the
+  // call, and thus would be immediately invalid if I returned it, thus I can
+  // use malloc to allocate it on the heap and use it outside the function
   char *result = malloc(size);
   if (result == NULL)
     return NULL;
