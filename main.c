@@ -31,7 +31,6 @@ int main()
   month_input[strcspn(month_input, "\n")] = '\0';
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
                         strlower(month_input));
-  printf("%d\n", month);
 
   if (month == -1 || month > 11)
   {
