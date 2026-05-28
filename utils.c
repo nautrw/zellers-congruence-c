@@ -57,7 +57,8 @@ char *getstr(char *prompt, size_t size) {
   input_str[strcspn(input_str, "\n")] = '\0';
 
   char *result = malloc(size);
-  if (result == NULL) return NULL;
+  if (result == NULL)
+    return NULL;
   strcpy(result, input_str);
   return result;
 }

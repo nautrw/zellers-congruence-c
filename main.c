@@ -5,14 +5,13 @@
 
 int zeller_formula(int year, int month, int month_day);
 
-int main()
-{
-  const char *week_days[7] = {"Saturday", "Sunday", "Monday", "Tuesday",
+int main() {
+  const char *week_days[7] = {"Saturday",  "Sunday",   "Monday", "Tuesday",
                               "Wednesday", "Thursday", "Friday"};
 
-  const char *months[12] = {"january", "february", "march", "april",
-                            "may", "june", "july", "august",
-                            "september", "october", "november", "december"};
+  const char *months[12] = {"january",   "february", "march",    "april",
+                            "may",       "june",     "july",     "august",
+                            "september", "october",  "november", "december"};
 
   int year = getint("Enter a year: ", 5);
 
@@ -25,10 +24,9 @@ int main()
   char month_input[12];
   strcpy(month_input, getstr("Enter a month: ", 12));
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
-                        strlower(month_input));
+                       strlower(month_input));
 
-  if (month == -1 || month > 11)
-  {
+  if (month == -1 || month > 11) {
     printf("You must enter a valid month.");
     exit(EXIT_FAILURE);
   }
@@ -39,23 +37,19 @@ int main()
 
   // When it is a leap year and the user entered February and over 29
   // february still = 1 because it has not been changed
-  if (leap_year == 1 && month == 1 && month_day > 29)
-  {
+  if (leap_year == 1 && month == 1 && month_day > 29) {
     printf("%d is a leap year and February was selected, "
            "so you must enter a day that is less than or equal to 29.\n",
            year);
     exit(EXIT_FAILURE);
-  }
-  else if (leap_year != 1 && month == 1 && month_day > 28)
-  {
+  } else if (leap_year != 1 && month == 1 && month_day > 28) {
     printf("February only has 28 days.\n");
     exit(EXIT_FAILURE);
   }
 
   // april, june, september, november all have 30 days
   const int thirty_day_months[4] = {3, 5, 8, 10};
-  if (ismember(thirty_day_months, 4, month) == 1 && month_day > 30)
-  {
+  if (ismember(thirty_day_months, 4, month) == 1 && month_day > 30) {
     printf("That month only has 30 days.\n");
     exit(EXIT_FAILURE);
   }
@@ -67,13 +61,11 @@ int main()
   return EXIT_SUCCESS;
 }
 
-int zeller_formula(int year, int month, int month_day)
-{
+int zeller_formula(int year, int month, int month_day) {
   // month is not supposed to be 0-based
   month++;
 
-  if (month < 3)
-  {
+  if (month < 3) {
     month += 12;
     year--;
   }
