@@ -6,8 +6,10 @@ OBJS=main.o utils.o
 $(TARGET): $(OBJS)
 	$(CC) $(OBJS) -o $(TARGET)
 
-%.o: %.c utils.h
-	$(CC) $(CFLAGS) -c $< -o $@
+%.d: %.c
+	$(CC) -MM $(CFLAGS) $< -o $@
+-include $(OBJS:.o=.d)
 
+.PHONY: clean
 clean:
-	rm -f *.o *.exe *.out zeller
+	rm -f *.o *.exe *.out *.d zeller
