@@ -12,4 +12,8 @@ $(TARGET): $(OBJS)
 
 .PHONY: clean
 clean:
-	rm -f *.o *.exe *.out *.d zeller
+ifeq ($(OS),Windows_NT)
+	del /s *.o *.d *.out $(TARGET).exe
+else
+	rm -f *.o *.d *.out $(TARGET)
+endif
