@@ -14,10 +14,7 @@ int main()
                             "may", "june", "july", "august",
                             "september", "october", "november", "december"};
 
-  char year_input[5];
-  printf("Enter a year: ");
-  fgets(year_input, sizeof(year_input), stdin);
-  int year = atoi(year_input);
+  int year = getint("Enter a year: ", 5);
 
   if (year <= 0) {
     printf("You must enter a valid year.\n");
@@ -38,10 +35,7 @@ int main()
     exit(EXIT_FAILURE);
   }
 
-  char month_day_input[5];
-  printf("Enter a day number: ");
-  fgets(month_day_input, sizeof(month_day_input), stdin);
-  int month_day = atoi(month_day_input);
+  int month_day = getint("Enter a day number: ", 5);
 
   int leap_year = isleap(year);
 

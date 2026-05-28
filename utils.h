@@ -11,4 +11,6 @@ int isleap(int year);
 
 int ismember(const int *nums, size_t size, int target);
 
+int getint(char *prompt, size_t size);
+
 #endif

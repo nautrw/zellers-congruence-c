@@ -42,3 +42,10 @@ int ismember(const int *nums, size_t size, int target) {
 
   return 0;
 }
+
+int getint(char *prompt, size_t size) {
+  printf("%s", prompt);
+  char input_str[size];
+  fgets(input_str, size, stdin);
+  return atoi(input_str);
+}
