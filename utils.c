@@ -3,6 +3,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 int getindex(const char **arr, size_t size, char *target) {
   for (int i = 0; (unsigned int)i < size; i++) {
@@ -21,24 +22,24 @@ char *strlower(char *str) {
   return str;
 }
 
-int isleap(int year) {
+bool isleap(int year) {
   if (year % 4 == 0 && year % 100 == 0) {
       return year % 400 == 0;
   } else {
-    return 1;
+    return true;
   }
 
-  return 0;
+  return false;
 }
 
-int ismember(const int *nums, size_t size, int target) {
+bool ismember(const int *nums, size_t size, int target) {
   for (int i = 0; (unsigned int)i < size; i++) {
     if (nums[i] == target) {
-      return 1;
+      return true;
     }
   }
 
-  return 0;
+  return false;
 }
 
 int getint(char *prompt, size_t size) {

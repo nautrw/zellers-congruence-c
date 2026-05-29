@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+#include <stdbool.h>
 
 int zeller_formula(int year, int month, int month_day);
 
@@ -34,23 +35,23 @@ int main() {
 
   int month_day = getint("Enter a day number: ", 5);
 
-  int leap_year = isleap(year);
+  bool leap_year = isleap(year);
 
   // When it is a leap year and the user entered February and over 29
   // february still = 1 because it has not been changed
-  if (leap_year == 1 && month == 1 && month_day > 29) {
+  if (leap_year && month == 1 && month_day > 29) {
     printf("%d is a leap year and February was selected, "
            "so you must enter a day that is less than or equal to 29.\n",
            year);
     exit(EXIT_FAILURE);
-  } else if (leap_year != 1 && month == 1 && month_day > 28) {
+  } else if (!leap_year && month == 1 && month_day > 28) {
     printf("February only has 28 days.\n");
     exit(EXIT_FAILURE);
   }
 
   // april, june, september, november all have 30 days
   const int thirty_day_months[4] = {3, 5, 8, 10};
-  if (ismember(thirty_day_months, 4, month) == 1 && month_day > 30) {
+  if (ismember(thirty_day_months, 4, month) && month_day > 30) {
     printf("That month only has 30 days.\n");
     exit(EXIT_FAILURE);
   }
