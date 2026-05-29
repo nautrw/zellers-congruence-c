@@ -4,13 +4,13 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-int getindex(const char **arr, size_t size, char *target);
+int getindex(char **arr, size_t size, char *target);
 
 char *strlower(char *str);
 
 bool isleap(int year);
 
-bool ismember(const int *nums, size_t size, int target);
+bool ismember(int *nums, size_t size, int target);
 
 int getint(char *prompt, size_t size);
 

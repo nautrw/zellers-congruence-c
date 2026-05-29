@@ -4,15 +4,18 @@
 #include <string.h>
 #include <stdbool.h>
 
+static char *week_days[7] = {"Saturday",  "Sunday",   "Monday", "Tuesday",
+                            "Wednesday", "Thursday", "Friday"};
+
+static char *months[12] = {"january",   "february", "march",    "april",
+                          "may",       "june",     "july",     "august",
+                          "september", "october",  "november", "december"};
+
+static int thirty_day_months[4] = {3, 5, 8, 10};
+
 int zeller_formula(int year, int month, int month_day);
 
 int main() {
-  const char *week_days[7] = {"Saturday",  "Sunday",   "Monday", "Tuesday",
-                              "Wednesday", "Thursday", "Friday"};
-
-  const char *months[12] = {"january",   "february", "march",    "april",
-                            "may",       "june",     "july",     "august",
-                            "september", "october",  "november", "december"};
 
   int year = getint("Enter a year: ", 5);
 
@@ -44,7 +47,6 @@ int main() {
     exitfail("February only has 28 days.\n");
 
   // april, june, september, november all have 30 days
-  const int thirty_day_months[4] = {3, 5, 8, 10};
   if (ismember(thirty_day_months, 4, month) && month_day > 30)
     exitfail("That month only has 30 days.\n");
 

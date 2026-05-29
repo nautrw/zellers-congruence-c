@@ -5,7 +5,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-int getindex(const char **arr, size_t size, char *target) {
+int getindex(char **arr, size_t size, char *target) {
   for (int i = 0; (unsigned int)i < size; i++) {
     if (strcmp(arr[i], target) == 0)
       return i;
@@ -32,7 +32,7 @@ bool isleap(int year) {
   return false;
 }
 
-bool ismember(const int *nums, size_t size, int target) {
+bool ismember(int *nums, size_t size, int target) {
   for (int i = 0; (unsigned int)i < size; i++) {
     if (nums[i] == target) {
       return true;
