@@ -1,9 +1,9 @@
 #include "utils.h"
 #include <ctype.h>
+#include <stdbool.h>
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <stdbool.h>
 
 int getindex(const char **arr, size_t size, char *target) {
   for (int i = 0; (unsigned int)i < size; i++) {
@@ -24,7 +24,7 @@ char *strlower(char *str) {
 
 bool isleap(int year) {
   if (year % 4 == 0 && year % 100 == 0) {
-      return year % 400 == 0;
+    return year % 400 == 0;
   } else {
     return true;
   }
@@ -67,4 +67,9 @@ char *getstr(char *prompt, size_t size) {
 
   input[strcspn(input, "\n")] = '\0';
   return input;
+}
+
+void exitfail(char *msg) {
+  printf("%s", msg);
+  exit(EXIT_FAILURE);
 }

@@ -16,4 +16,6 @@ int getint(char *prompt, size_t size);
 
 char *getstr(char *prompt, size_t size);
 
+void exitfail(char *msg);
+
 #endif

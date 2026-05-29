@@ -16,26 +16,20 @@ int main() {
 
   int year = getint("Enter a year: ", 5);
 
-  if (year <= 0) {
-    printf("You must enter a valid year.\n");
-    exit(EXIT_FAILURE);
-  }
+  if (year <= 0)
+    exitfail("You must enter a valid year.\n");
 
   getchar();
   char *month_input = getstr("Enter a month: ", 12);
 
-  if (month_input == NULL) {
-    perror("Failed to read month input.");
-    exit(EXIT_FAILURE);
-  }
+  if (month_input == NULL)
+    exitfail("Failed to read month input.\n");
 
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
                        strlower(month_input));
 
-  if (month == -1 || month > 11) {
-    printf("You must enter a valid month.");
-    exit(EXIT_FAILURE);
-  }
+  if (month == -1 || month > 11)
+    exitfail("You must enter a valid month.\n");
 
   int month_day = getint("Enter a day number: ", 5);
 
@@ -43,22 +37,16 @@ int main() {
 
   // When it is a leap year and the user entered February and over 29
   // february still = 1 because it has not been changed
-  if (leap_year && month == 1 && month_day > 29) {
-    printf("%d is a leap year and February was selected, "
-           "so you must enter a day that is less than or equal to 29.\n",
-           year);
-    exit(EXIT_FAILURE);
-  } else if (!leap_year && month == 1 && month_day > 28) {
-    printf("February only has 28 days.\n");
-    exit(EXIT_FAILURE);
-  }
+  if (leap_year && month == 1 && month_day > 29)
+    exitfail("You entered a leap year and February was selected, "
+           "so you must enter a day that is less than or equal to 29.\n");
+  else if (!leap_year && month == 1 && month_day > 28)
+    exitfail("February only has 28 days.\n");
 
   // april, june, september, november all have 30 days
   const int thirty_day_months[4] = {3, 5, 8, 10};
-  if (ismember(thirty_day_months, 4, month) && month_day > 30) {
-    printf("That month only has 30 days.\n");
-    exit(EXIT_FAILURE);
-  }
+  if (ismember(thirty_day_months, 4, month) && month_day > 30)
+    exitfail("That month only has 30 days.\n");
 
   // month is not supposed to be 0-based
   month++;
