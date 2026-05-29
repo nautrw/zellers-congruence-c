@@ -50,16 +50,21 @@ int getint(char *prompt, size_t size) {
 }
 
 char *getstr(char *prompt, size_t size) {
-  printf("%s", prompt);
+  char *input;
   // from my limited understanding, returning `input_str` would be wrong because
   // that pointer is in the stack, so it only exists for the duration of the
   // call, and thus would be immediately invalid if I returned it, thus I can
   // use malloc to allocate it on the heap and use it outside the function
-  char *result = malloc(size);
-  fgets(result, size, stdin);
-  result[strcspn(result, "\n")] = '\0';
-
-  if (result == NULL)
+  input = malloc(size * sizeof(*input));
+  if (input == NULL) // malloc can fail
     return NULL;
-  return result;
+
+  printf("%s", prompt);
+  if (fgets(input, size, stdin) == NULL) {
+    free(input);
+    return NULL;
+  }
+
+  input[strcspn(input, "\n")] = '\0';
+  return input;
 }

@@ -22,8 +22,12 @@ int main() {
   }
 
   getchar();
-  char month_input[12];
-  strcpy(month_input, getstr("Enter a month: ", sizeof(month_input)));
+  char *month_input = getstr("Enter a month: ", sizeof(month_input));
+
+  if (month_input == NULL) {
+    perror("Failed to read month input.");
+    exit(EXIT_FAILURE);
+  }
 
   int month = getindex(months, sizeof(months) / sizeof(months[0]),
                        strlower(month_input));
