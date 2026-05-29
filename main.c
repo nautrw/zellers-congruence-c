@@ -22,7 +22,7 @@ int main() {
   }
 
   getchar();
-  char *month_input = getstr("Enter a month: ", sizeof(month_input));
+  char *month_input = getstr("Enter a month: ", 12);
 
   if (month_input == NULL) {
     perror("Failed to read month input.");
