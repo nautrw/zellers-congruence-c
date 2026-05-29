@@ -60,6 +60,8 @@ int main() {
     exit(EXIT_FAILURE);
   }
 
+  // month is not supposed to be 0-based
+  month++;
   int week_day = zeller_formula(year, month, month_day);
 
   printf("That day will be a %s.\n", week_days[week_day]);
@@ -68,9 +70,6 @@ int main() {
 }
 
 int zeller_formula(int year, int month, int month_day) {
-  // month is not supposed to be 0-based
-  month++;
-
   if (month < 3) {
     month += 12;
     year--;
